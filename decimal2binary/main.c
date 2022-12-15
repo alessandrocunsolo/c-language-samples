@@ -15,7 +15,7 @@ int main(){
     for(i=0;i<8;i++){
         binary[i] = 0;
     }
-
+ 
     index = 7;
     while(num>0){
         binary[index] = num % 2;

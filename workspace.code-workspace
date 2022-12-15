@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"conio.h": "c"
+			"conio.h": "c",
+			"windows.h": "c"
 		}
 	}
 }

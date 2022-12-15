@@ -6,17 +6,31 @@
 #include <conio.h>
 /*#include<unistd.h>*/
 #include<windows.h>
-void gotoxy(int x,int y){
-    printf("%c[%d;%df",0x1B,y,x);
+#include <windows.h> 
+
+void gotoxy(int x, int y)
+{
+  COORD coord;
+  coord.X = x;
+  coord.Y = y;
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
+void clsscr(){
+    printf("\e[1;1H\e[2J");
+}
+
+
 #endif
 #ifdef __linux__
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
- 
-int kbhit(void)
+void gotoxy(int x,int y){
+    printf("%c[%d;%df",0x1B,y,x);
+}
+int kbhit(void) 
 {
   struct termios oldt, newt;
   int ch;
@@ -45,32 +59,15 @@ int kbhit(void)
 #endif
 
 int main(){
-    int x=0,ix=1,r;
-
-    char ch;
-    srand(time(NULL));
+    int x=0,ix=1;
     while(1){
         gotoxy(x,10);
-        //printf(" ");
-        printf("0");
+        printf("%c",219);
         Sleep(100);
-        gotoxy(x,10);
-        printf(" ");
+        clsscr();
         x+=ix;
-        if (kbhit()){
-            ch = getchar();
-        }
-
-        if (ch == 32){
-            ix = -ix;
-            ch = 0x0;
-        }
-        r = rand() % 100; 
-        gotoxy(r,10);
-        printf("#");
-        /*
         if (x>100 || x==0){
             ix=-ix;
-        }*/
+        }
     }
 }
